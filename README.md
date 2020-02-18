@@ -7,8 +7,6 @@ Este es un ejercicio de refactoring dedicado a aprender sobre:
 
 Esté el código inicial de la kata escrito en JAVA.
 
-Documentación: 
-
 ## Cómo empezar
 
 Para arrancar deberías descargarte este código.
