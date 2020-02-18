@@ -1,4 +1,4 @@
-# Birthday Greetings kata in JAVA
+# Birthday Greetings kata en JAVA
 
 Este es un ejercicio de refactoring dedicado a aprender sobre:
 - Inversión de dependencias e inyección de dependencias.
