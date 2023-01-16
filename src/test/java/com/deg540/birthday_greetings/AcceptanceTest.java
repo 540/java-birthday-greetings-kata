@@ -1,5 +1,8 @@
 package com.deg540.birthday_greetings;
 
+import com.deg540.birthday_greetings.domain.OurDate;
+import com.deg540.birthday_greetings.infrastructure.FileSystemEmployeeRepository;
+import com.deg540.birthday_greetings.services.BirthdayService;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;

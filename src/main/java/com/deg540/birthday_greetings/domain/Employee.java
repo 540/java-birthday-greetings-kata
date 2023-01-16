@@ -1,4 +1,4 @@
-package com.deg540.birthday_greetings;
+package com.deg540.birthday_greetings.domain;
 
 import java.text.ParseException;
 

@@ -1,5 +1,7 @@
-package com.deg540.birthday_greetings;
+package com.deg540.birthday_greetings.domain;
 
+import com.deg540.birthday_greetings.domain.Employee;
+import com.deg540.birthday_greetings.domain.OurDate;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
