@@ -1,25 +1,20 @@
 package com.deg540.birthday_greetings;
 
-import com.palantir.docker.compose.DockerComposeRule;
-import com.palantir.docker.compose.connection.waiting.HealthChecks;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
+
+import java.io.IOException;
 
 import static com.deg540.birthday_greetings.MessageReader.messagesSent;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class AcceptanceTest {
-
-    @ClassRule
-    public static DockerComposeRule docker = DockerComposeRule.builder()
-            .file("src/test/resources/docker-compose.yaml")
-            .waitingForService("mailhog", HealthChecks.toHaveAllPortsOpen())
-            .build();
-
     private static final String SMTP_HOST = "127.0.0.1";
     private static final int SMTP_PORT = 1025;
 
@@ -28,6 +23,8 @@ public class AcceptanceTest {
     @Before
     public void setUp() throws Exception {
         service = new BirthdayService();
+
+        deleteAllMailsFromMailhog();
     }
 
     @Test
@@ -50,5 +47,11 @@ public class AcceptanceTest {
                 new OurDate("2008/01/01"), SMTP_HOST, SMTP_PORT);
 
         assertEquals("what? messages?", 0, messagesSent().length);
+    }
+
+    private static void deleteAllMailsFromMailhog() throws IOException {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpDelete httpget = new HttpDelete("http://127.0.0.1:8025/api/v1/messages");
+        httpclient.execute(httpget);
     }
 }
