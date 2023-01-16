@@ -24,8 +24,8 @@ public class BirthdayService {
 
     private final EmployeeRepository employeeRepository;
 
-    public BirthdayService() {
-        this.employeeRepository = new FileSystemEmployeeRepository();
+    public BirthdayService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     public void sendGreetings(String fileName, OurDate ourDate) throws IOException, ParseException,

@@ -22,7 +22,7 @@ public class AcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        service = new BirthdayService();
+        service = new BirthdayService(new FileSystemEmployeeRepository());
 
         deleteAllMailsFromMailhog();
     }
