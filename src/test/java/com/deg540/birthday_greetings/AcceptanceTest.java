@@ -2,6 +2,7 @@ package com.deg540.birthday_greetings;
 
 import com.deg540.birthday_greetings.domain.OurDate;
 import com.deg540.birthday_greetings.infrastructure.FileSystemEmployeeRepository;
+import com.deg540.birthday_greetings.infrastructure.TransportMailer;
 import com.deg540.birthday_greetings.services.BirthdayService;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -22,14 +23,14 @@ public class AcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        service = new BirthdayService(new FileSystemEmployeeRepository());
+        service = new BirthdayService(new FileSystemEmployeeRepository(), new TransportMailer());
 
         deleteAllMailsFromMailhog();
     }
 
     @Test
     public void baseScenario() throws Exception {
-        service.sendGreetings("src/test/resources/employee_data.txt", new OurDate("2008/10/08"));
+        service.sendGreetings(new OurDate("2008/10/08"));
 
         MessageReader.Message[] messages = messagesSent();
         assertEquals("message not sent?", 1, messages.length);
@@ -42,7 +43,7 @@ public class AcceptanceTest {
 
     @Test
     public void willNotSendEmailsWhenNobodysBirthday() throws Exception {
-        service.sendGreetings("src/test/resources/employee_data.txt", new OurDate("2008/01/01"));
+        service.sendGreetings(new OurDate("2008/01/01"));
 
         assertEquals("what? messages?", 0, messagesSent().length);
     }
