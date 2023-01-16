@@ -15,9 +15,6 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class AcceptanceTest {
-    private static final String SMTP_HOST = "127.0.0.1";
-    private static final int SMTP_PORT = 1025;
-
     private BirthdayService service;
 
     @Before
@@ -29,8 +26,7 @@ public class AcceptanceTest {
 
     @Test
     public void baseScenario() throws Exception {
-        service.sendGreetings("src/test/resources/employee_data.txt",
-                new OurDate("2008/10/08"), SMTP_HOST, SMTP_PORT);
+        service.sendGreetings("src/test/resources/employee_data.txt", new OurDate("2008/10/08"));
 
         MessageReader.Message[] messages = messagesSent();
         assertEquals("message not sent?", 1, messages.length);
@@ -43,8 +39,7 @@ public class AcceptanceTest {
 
     @Test
     public void willNotSendEmailsWhenNobodysBirthday() throws Exception {
-        service.sendGreetings("src/test/resources/employee_data.txt",
-                new OurDate("2008/01/01"), SMTP_HOST, SMTP_PORT);
+        service.sendGreetings("src/test/resources/employee_data.txt", new OurDate("2008/01/01"));
 
         assertEquals("what? messages?", 0, messagesSent().length);
     }
