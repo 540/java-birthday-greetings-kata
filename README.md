@@ -5,7 +5,7 @@ Este es un ejercicio de refactoring dedicado a aprender sobre:
 - Separación de lógica de negocio e infraestructura.
 - Arquitectura hexagonal.
 
-Esté el código inicial de la kata escrito en JAVA.
+Este es el código inicial de la kata escrito en JAVA.
 
 ## Cómo empezar
 
